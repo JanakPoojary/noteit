@@ -1,0 +1,20 @@
+<div class="container text-center">
+    <h1>noteIt</h1>
+    <h3>Welcome!</h3>
+    <div class="box">
+        <p>Get Started</p>
+        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+
+        <button class="btn btn-outline-dark" href="/users/googleauth" role="button" style="text-transform:none"
+            (click)="signin()">
+            <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+            Login with Google
+    </button>
+    </div>
+    <p>{{guser.getAuthResponse().id_token | json}}</p>
+    <p>{{guser.getBasicProfile().getName()}}</p>
+    <p>{{guser.getBasicProfile().getEmail()}}</p>
+    <p>{{guser.getBasicProfile().getId()}}</p>
+    <p>{{guser.getBasicProfile().getImageUrl()}}</p>
+</div>

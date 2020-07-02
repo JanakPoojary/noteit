@@ -1,1 +1,38 @@
-<p>login works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <button *ngIf="!loggedIn" class="btn btn-warning" tabindex="-1" (click)="signInWithGoogle()">Sign In
+                </button>
+            </li>
+            <li *ngIf="loggedIn" class="nav-item dropdown">
+                <div class="row">
+                    <div class="col">
+                        <img style="border-radius: 50%;height: 3rem;width:auto;" src="{{user.photoUrl}}">
+                    </div>
+                    <div class="col">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{user.name}}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <img src="{{user.photoUrl}}" class="dropdown-item" style="width:7rem;height:auto;">
+                            <p class="dropdown-item" href="#">{{user.name}}</p>
+                            <p class="dropdown-item" href="#">{{user.email}}</p>
+                            <button class="btn btn-warning" (click)="signOut()">Sign Out
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<div *ngIf="user">
+    <div class="text-center">
+        <h2> Welcome,</h2>
+        <h4>{{user.name}}</h4>
+    </div>
+
+</div>

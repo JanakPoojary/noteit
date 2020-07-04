@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SocialAuthService } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
+import { Router } from '@angular/router';
+import { LogserveService } from '../logserve.service';
  
 
 @Component({
@@ -12,8 +14,7 @@ import { SocialUser } from "angularx-social-login";
 export class LoginComponent implements OnInit {
   user: SocialUser;
   loggedIn: boolean;
- 
-  constructor(private authService: SocialAuthService) { }
+  constructor(private authService: SocialAuthService, private router: Router, private ls: LogserveService) { }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
@@ -25,6 +26,8 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       ()=>{
         console.log("user signed in sucessfully");
+        this.ls.isloggedIn=this.loggedIn;
+        this.router.navigate(['/login/notecard']);
       }
     );
   }
@@ -32,7 +35,9 @@ export class LoginComponent implements OnInit {
     this.authService.signOut().then(()=>{
       this.user=null;
       this.loggedIn = false;
+      this.ls.isloggedIn=this.loggedIn;
       console.log("user logged out successfully");
+      this.router.navigate(['/login/home']);
     });
   }
 }

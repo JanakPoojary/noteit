@@ -13,14 +13,16 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 import {
   GoogleLoginProvider
 } from 'angularx-social-login';
-import { NotecardComponent } from './notecard/notecard.component'
+import { NotecardComponent } from './notecard/notecard.component';
+import { ReversePipe } from './reverse.pipe'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    NotecardComponent
+    NotecardComponent,
+    ReversePipe
   ],
   imports: [
     BrowserModule,

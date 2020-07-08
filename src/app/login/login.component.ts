@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       ()=>{
         console.log("user signed in sucessfully");
-        console.log(this.user.id);
         this.ls.isloggedIn=this.loggedIn;
         this.router.navigate(['/login/notecard']);
       }

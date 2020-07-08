@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
       this.user = user;
+      this.ls.userinfo=this.user;
       this.loggedIn = (user != null);
     });
   }
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       ()=>{
         console.log("user signed in sucessfully");
+        console.log(this.user.id);
         this.ls.isloggedIn=this.loggedIn;
         this.router.navigate(['/login/notecard']);
       }
@@ -34,6 +36,7 @@ export class LoginComponent implements OnInit {
   signOut(): void {
     this.authService.signOut().then(()=>{
       this.user=null;
+      this.ls.userinfo=null;
       this.loggedIn = false;
       this.ls.isloggedIn=this.loggedIn;
       console.log("user logged out successfully");

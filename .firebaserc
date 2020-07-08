@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "noteit-282104": {
+      "hosting": {
+        "noteit": [
+          "noteit-282104"
+        ]
+      }
+    }
+  }
+}

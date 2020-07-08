@@ -3,25 +3,25 @@
         <div class="shadow text-center">
             <div class="row">
                 <div class="col-md-10">
-                    <input class="form-control" type="text" id="note" name="note" placeholder="Take note..." required
-                        [(ngModel)]='note'>
+                    <input class="form-control" type="text" id="note" name="note" placeholder="Take note..." required>
                 </div>
                 <div class="col-md-1">
-                    <button class="btn btn-light" (click)="add()">Add</button>
+                    <button class="btn btn-light">Add</button>
                 </div>
             </div>
         </div>
     </form>
     <div class="row">
-        <div class="col-md-4" *ngFor="let note of caller()">
+        <div class="col-md-4" *ngFor='let n of notes | async'>
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">{{note}}</h5>
-                    <p class="card-text">{{note}}</p>
+                    <h5 class="card-title">{{n.title}}</h5>
+                    <p class="card-text">{{n.brief}}</p>
                     <a href="#" class="card-link">Card link</a>
                     <a href="#" class="card-link">Another link</a>
                 </div>
             </div>
         </div>
     </div>
+    
 </div>

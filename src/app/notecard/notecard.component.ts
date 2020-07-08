@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
+import { Observable } from 'rxjs';
+import { LogserveService } from '../logserve.service';
+import { groupBy } from 'rxjs/internal/operators/groupBy';
 
 @Component({
   selector: 'app-notecard',
@@ -7,21 +12,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./notecard.component.css']
 })
 export class NotecardComponent implements OnInit {
-  notes:Array<string>;
-  note:string;
-  title:Array<string>;
-  constructor(private router: Router) { }
+  notes: Observable<any>;
+  constructor(private router: Router,public db: AngularFireDatabase,private ls: LogserveService) {
+    // this.notes= db.list('test').valueChanges();
+   }
 
   ngOnInit(): void {
-    this.notes=["do this","do that","do whatever", "do nothing"];
-    this.title=["Note1", "note2", "note3", "note4", "note5","nate6","note7","note8"];
+    this.notes=this.db.list('test', ref=>ref.orderByChild('u_id').equalTo(parseInt(this.ls.userinfo.id))).valueChanges();
+    console.log(this.ls.userinfo.id);
   }
-add(){
-  this.title.push(this.note);
-  console.log(this.title);
-  this.router.navigate(['/login/home']);
+add(form: NgForm){
+  form.resetForm();
+  this.router.navigate(['/login/notecard']);
 }
-caller(){
-  return this.title.reverse();
-}
+// caller(){
+//   return this.title.reverse();
+// }
 }

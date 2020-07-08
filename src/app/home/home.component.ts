@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LogserveService } from '../logserve.service';
 
 @Component({
   selector: 'app-home',
@@ -6,11 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  note:string;
+  loggedin:boolean;
 
-  constructor() { }
+  constructor(private ls: LogserveService) { }
 
   ngOnInit(): void {
+    this.loggedin=this.ls.isloggedIn;
   }
 
 }

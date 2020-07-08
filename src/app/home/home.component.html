@@ -1,13 +1,14 @@
-<div class="container">
+<div class="container" style="margin-top:15vh;">
     <div class="text-center">
         <div class="jumbotron">
-            <h1 class="display-4">Hello there, Welcome to NoteIt!</h1>
-            <p class="lead">Note it is your own friendly note space. So go on. Note it Up!!</p>
+            <h1 class="display-4"><span style="color:springgreen">NoteIt! </span><br>✍️</h1>
+            <p class="lead">Your own note space.</p>
             <hr class="my-4">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            <p class="lead">
+            <h3>Hello there 👋, Welcome!</h3>
+            <p>NoteIt is a <span style="color:fuchsia">Notes-on-the-go</span> platform. Just signin and make notes. Enjoy unlimated notes with google sign in.</p>
+            <h4 *ngIf="!loggedin" class="lead" style="color:orangered">
                 Sign In to get started
-            </p>
+            </h4>
         </div>
     </div>
 </div>

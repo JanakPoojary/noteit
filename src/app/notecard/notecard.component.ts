@@ -16,6 +16,9 @@ export class NotecardComponent implements OnInit {
   notes: Observable<any>;
   title: string;
   brief: string;
+  updatenid: string;
+  u_brief: string;
+  u_title: string;
   constructor(private router: Router, public db: AngularFireDatabase, private ls: LogserveService) {
   }
 
@@ -38,17 +41,43 @@ export class NotecardComponent implements OnInit {
     form.resetForm();
     this.router.navigate(['/login/notecard']);
   }
+
+
   delete(noteid: string) {
-    if(confirm("Are you sure to delete this note?")){
+    if (confirm("Are you sure to delete this note?")) {
       var ref = firebase.database().ref('test');
+      var thekey;
+      ref.orderByChild('n_id').equalTo(noteid).on("value", function (snapshot) {
+        snapshot.forEach((function (child) {
+          thekey = child.key;
+          ref.child(thekey).remove();
+        }));
+      });
+    }
+  }
+  updateid(noteid: string, t:string, b:string) {
+    this.updatenid = noteid;
+    this.u_title = t;
+    this.u_brief = b;
+  }
+  update() {
+    var ref = firebase.database().ref('test');
     var thekey;
-    ref.orderByChild('n_id').equalTo(noteid).on("value", function (snapshot) {
-      snapshot.forEach((function (child) { 
-        thekey=child.key;
-        ref.child(thekey).remove();
+    var newvalue = {
+      n_id: this.updatenid,
+      title: this.u_title,
+      brief: this.u_brief,
+      u_id: parseInt(this.ls.userinfo.id)
+
+    };
+    ref.orderByChild('n_id').equalTo(this.updatenid).on("value", function (snapshot) {
+      snapshot.forEach((function (child) {
+        thekey = child.key;
+        ref.child(thekey).update(newvalue);
       }));
     });
-    }
-    
+    this.updatenid=null;
+    this.u_title=null;
+    this.u_brief=null;
   }
 }

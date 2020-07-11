@@ -16,16 +16,54 @@
             </div>
         </div>
     </form>
-    <div class="row">
+    <div *ngIf="notes" class="row">
         <div class="col-md-4" *ngFor='let n of notes | async | reverse'>
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">{{n.title}}</h5>
                     <p class="card-text">{{n.brief}}</p>
+                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter"  (click)='updateid(n.n_id, n.title, n.brief)'>
+                        Update
+                      </button>
+                    <!-- <a class="btn btn-light" (click)='update(n.n_id)'>Update</a> -->
                     <a class="btn btn-light" (click)='delete(n.n_id)'>Delete</a>
                 </div>
             </div>
         </div>
     </div>
-    
 </div>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Update note</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form #uform="ngForm">
+                <div class="text-center">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" id="title" name="title" placeholder="Title..." required
+                            [(ngModel)]="u_title">
+                        </div>
+                        <div class="col-md-10">
+                            <input class="form-control" type="text" id="brief" name="brief" placeholder="Brief..." required
+                            [(ngModel)]="u_brief">
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-warning" (click)='update()'>save</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>

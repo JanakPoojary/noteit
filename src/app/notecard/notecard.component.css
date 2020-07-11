@@ -14,7 +14,7 @@ form {
     /* Tell the input to use all the available space */
     /* And hide the input's outline, so the form looks like the outline */
     border:none;
-    margin:0.5rem;
+    margin-top:0.5rem;
   }
   
   input:focus {

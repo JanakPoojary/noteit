@@ -36,8 +36,6 @@ export class NotecardComponent implements OnInit {
       u_id: parseInt(this.ls.userinfo.id)
     }
     );
-    console.log(insertdata.key);
-
     form.resetForm();
     this.router.navigate(['/login/notecard']);
   }
@@ -79,5 +77,6 @@ export class NotecardComponent implements OnInit {
     this.updatenid=null;
     this.u_title=null;
     this.u_brief=null;
+    this.router.navigate(['/login/notecard']);
   }
 }

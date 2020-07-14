@@ -4,8 +4,7 @@ import { NgForm } from '@angular/forms';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { LogserveService } from '../logserve.service';
-import { groupBy } from 'rxjs/internal/operators/groupBy';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-notecard',
@@ -29,7 +28,7 @@ export class NotecardComponent implements OnInit {
     var date = new Date();
     var timestamp = date.getTime();
     var nid = (parseInt(this.ls.userinfo.id)).toString() + timestamp;
-    var insertdata = this.db.list('test').push({
+    this.db.list('test').push({
       n_id: nid,
       title: this.title,
       brief: this.brief,
@@ -53,7 +52,7 @@ export class NotecardComponent implements OnInit {
       });
     }
   }
-  updateid(noteid: string, t:string, b:string) {
+  updateid(noteid: string, t: string, b: string) {
     this.updatenid = noteid;
     this.u_title = t;
     this.u_brief = b;
@@ -74,9 +73,9 @@ export class NotecardComponent implements OnInit {
         ref.child(thekey).update(newvalue);
       }));
     });
-    this.updatenid=null;
-    this.u_title=null;
-    this.u_brief=null;
+    this.updatenid = null;
+    this.u_title = null;
+    this.u_brief = null;
     this.router.navigate(['/login/notecard']);
   }
 }

@@ -68,7 +68,7 @@ export class NotecardComponent implements OnInit {
       u_id: parseInt(this.ls.userinfo.id)
 
     };
-    ref.orderByChild('n_id').equalTo(this.updatenid).on("value", function (snapshot) {
+    ref.orderByChild('n_id').equalTo(this.updatenid).once("value", function (snapshot) {
       snapshot.forEach((function (child) {
         thekey = child.key;
         ref.child(thekey).update(newvalue);

@@ -32,7 +32,8 @@ export class NotecardComponent implements OnInit {
       n_id: nid,
       title: this.title,
       brief: this.brief,
-      u_id: parseInt(this.ls.userinfo.id)
+      u_id: parseInt(this.ls.userinfo.id),
+      timestamp: timestamp
     }
     );
     form.resetForm();
